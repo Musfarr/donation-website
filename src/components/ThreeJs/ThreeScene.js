@@ -45,6 +45,7 @@ const ThreeScene = () => {
   const [boyFrameIndex, setBoyFrameIndex] = useState(0);
   const [registerModal, setRegisterModal] = useState(false)
   const [loginModal, setLoginModal] = useState(false)
+  const[Wardrobe , togglewardrobe] = useState(false)
   const handleRegister = () => {
     setRegisterModal(true)
     setLoginModal(false)
@@ -137,9 +138,15 @@ const ThreeScene = () => {
                 <Card.Title className="heading-card mb-3">
                   How many lives you can impact?
                 </Card.Title>
-                <Card.Text className="mb-2 text-card text-black">5 Innocents</Card.Text>{" "}
-                <Card.Text className="mb-2 text-card text-black">15 Innocents</Card.Text>{" "}
-                <Card.Text className="mb-2 text-card text-black">25 Innocents</Card.Text>
+                <Card.Text className="mb-2 text-card text-black">
+                  5 Innocents
+                </Card.Text>{" "}
+                <Card.Text className="mb-2 text-card text-black">
+                  15 Innocents
+                </Card.Text>{" "}
+                <Card.Text className="mb-2 text-card text-black">
+                  25 Innocents
+                </Card.Text>
                 <Button
                   variant="primary"
                   className="reg-btn"
@@ -150,35 +157,36 @@ const ThreeScene = () => {
               </Card.Body>
             </Card>
             <div className="">
-                <Form.Control
-                  type="number"
-                  placeholder="Enter Amount"
-                  onChange={(e) => setCurrentDonation(Number(e.target.value))}
-                />
-                <button onClick={(e) => handleDonation(currentDonation)} className="uk-button uk-button-danger ">
-                  {" "}
-                  Donate{" "}
-                </button>
-                {/* <button  onClick={handleAttachCard} className="uk-button uk-button-secondary">
+              <Form.Control
+                type="number"
+                placeholder="Enter Amount"
+                onChange={(e) => setCurrentDonation(Number(e.target.value))}
+              />
+              <button
+                onClick={(e) => handleDonation(currentDonation)}
+                className="uk-button uk-button-danger "
+              >
+                {" "}
+                Donate{" "}
+              </button>
+              {/* <button  onClick={handleAttachCard} className="uk-button uk-button-secondary">
                   {" "}
                   Attach Card{" "}
                 </button> */}
-              </div>
-
-
+            </div>
           </Col>
           {registerModal && (
             <SignupModal
               show={registerModal}
               onHide={() => setRegisterModal(false)}
-              createLogin={ () => handleLogin() }
+              createLogin={() => handleLogin()}
             />
           )}
           {loginModal && (
             <LoginModal
               show={loginModal}
               onHide={() => setLoginModal(false)}
-              createAccount={ () => handleRegister() }
+              createAccount={() => handleRegister()}
             />
           )}
           <Col xs={4} md={6} lg={6} className="character-div">
@@ -242,7 +250,7 @@ const ThreeScene = () => {
                 </Form.Group>
               </Form> */}
 
-                {/* <div className="uk-card-body">
+              {/* <div className="uk-card-body">
                 <Form.Control
                   type="number"
                   placeholder="Enter Amount"
@@ -257,27 +265,44 @@ const ThreeScene = () => {
                   Attach Card{" "}
                 </button>
               </div> */}
-
-               
             </Col>
-
-
           </Col>
           <Col lg={3}>
+            
+            <button
+              className="uk-button uk-button-secondary"
+              onClick={() => togglewardrobe(!Wardrobe)}
+            >
+              {" "}
+              Open Wardrobe{" "}
+            </button>
 
-            <button className='uk-button uk-button-secondary' > Open Wardrobe </button>
-            <div className='uk-grid uk-child-width-1-4 items-grid uk-grid-collapse' uk-grid="">
-              {items.map((item, index) => (
-                <div key={index} onClick={() => handleItemSelect(item)}
-                
-                >
-                   
-                    <Image src={`/assets/images/${item.name}.png`} height={5} width={5} className='imageDiv' alt={item.name} />
-                    <p className='pricetag'>{item.name} - ${item.price}</p>
-                  
-                </div>
-              ))}
-            </div>
+            <div className='wardrobe-container' >
+              
+              {/* wardrobe variable ki base per image render hogi aur uski image position absolute hai uper toggle wardrobe ka button hai */}
+              <img className='wardrobe-img' src={`${Wardrobe? 'assets/images/close.png'  : "assets/images/opencloset.png" }`} />
+              
+              <div
+                className=    ' uk-grid uk-child-width-1-4 items-grid uk-grid-collapse '
+                uk-grid=""
+              >
+                {items.map((item, index) => (
+                  <div   key={index} onClick={() => handleItemSelect(item)}>
+                    <Image
+                      src={`/assets/images/${item.name}.png`}
+                      height={5}
+                      width={5}
+                      className="imageDiv"
+                      alt={item.name}
+                    />
+                    <p className="pricetag">
+                      {item.name} - ${item.price}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              </div>
+            
 
 
             {/* <div className='uk-grid uk-child-width-1-4 items-grid uk-grid-collapse' uk-grid="">
@@ -293,8 +318,8 @@ const ThreeScene = () => {
               ))}
             </div> */}
 
-            <div className='pt-4 items-donate-box '>
-            <p className='totalprice'>Total Price: ${totalPrice}</p>
+            <div className="pt-4 items-donate-box ">
+              <p className="totalprice">Total Price: ${totalPrice}</p>
 
               <Button
                 variant="outline-secondary"
@@ -304,12 +329,9 @@ const ThreeScene = () => {
                 Donate
               </Button>
             </div>
-
           </Col>
-
         </Row>
       </Container>
-
 
       {/* <section className="donate-sec">
         <div className="gradient">
@@ -356,7 +378,7 @@ const ThreeScene = () => {
             <div className="register-title uk-padding ">
               <h1 className="header-card2">TAKE THE CHALLENGE</h1>
               <h2> How many lives you can impact? </h2>
-             
+
               <Button
                 variant="primary"
                 className="uk-button uk-button-secondary"

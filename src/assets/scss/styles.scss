@@ -356,6 +356,32 @@ color: white;
     font-weight: 600 !important;
 }
 
+.wardrobeopen{
+    background-image: url("/assets/images/opencloset.png");
+    background-position: center;
+    background-size: cover;
+}
+     .wardrobeclosed {
+        background-image: url("/assets/images/drawerclose.png");
+        background-position: center;
+        background-size: cover;
+
+      }
+.wardrobe-container {
+    transition: all 0.5s ease-in-out;
+  }
+.wardrobe-img {
+    position: absolute;
+    width: 25%;
+    transition: all 0.8s ease-in-out;
+  }
+  
+    //   .wardrobeopen {
+    //     opacity: 1;
+    //   }
+    
+ 
+
 @media screen and (max-width:768px) {
     .boyimg{
         width: 50%;
